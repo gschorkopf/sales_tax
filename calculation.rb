@@ -1,6 +1,6 @@
 require_relative 'string'
 
-class Calculation
+module Calculation
 
   def name_and_price(items_and_values)
     items_and_values.gsub(" at", ":")

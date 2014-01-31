@@ -1,43 +1,45 @@
 require_relative 'calculation'
 require_relative 'file_reader'
+require_relative 'file_parser'
 
 class Receipt
+  attr_reader :input
+  include Calculation
 
-  def summary(input)
-    c = Calculation.new
+  def initialize(input)
+    @input = input
+  end
+
+  def summary
     input.collect do |line|
-      summary = c.name_and_price(line).split[0..-2].join(" ")
-      if c.sales_tax(line) > 0
-        total = c.sales_tax(line) + c.price(line)
+      summary = name_and_price(line).split[0..-2].join(" ")
+      if sales_tax(line) > 0
+        total = sales_tax(line) + price(line)
       else
-        total = c.price(line)
+        total = price(line)
       end
       "#{summary} #{total}"
     end
   end
 
-  def sales_tax_total(input)
-    c = Calculation.new
+  def sales_tax_total
     input.collect do |line|
-      c.sales_tax(line)
+      sales_tax(line)
     end.inject(:+)
   end
 
-  def item_totals(input)
-    c = Calculation.new
+  def item_totals
     input.collect do |line|
-      if c.sales_tax(line) > 0
-        c.sales_tax(line) + c.price(line)
+      if sales_tax(line) > 0
+        sales_tax(line) + price(line)
       else
-        c.price(line)
+        price(line)
       end
     end
   end
 
-  def subtotal(input)
-    item_totals(input).collect do |total|
-      total
-    end.inject(:+)
+  def subtotal
+    item_totals.inject(:+)
   end
 
 
@@ -53,9 +55,6 @@ class Receipt
 
 end
 
-r = Receipt.new
-puts r.summary(FileReader.input)
-puts r.sales_tax_total(FileReader.input)
-puts r.subtotal(FileReader.input)
+
 
 
