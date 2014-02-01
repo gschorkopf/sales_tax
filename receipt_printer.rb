@@ -22,5 +22,6 @@ class ReceiptPrinter
 end
 
 r = ReceiptPrinter.new
-puts r.print_formatted_receipt
+# puts r.create_receipts
+r.print_formatted_receipt
 
