@@ -1,6 +1,4 @@
 require_relative 'calculation'
-require_relative 'file_reader'
-require_relative 'file_parser'
 
 class Receipt
   attr_reader :input
@@ -41,17 +39,6 @@ class Receipt
   def subtotal
     item_totals.inject(:+)
   end
-
-
-
-
-  # Output 1:
-  # 1 book : 12.49
-  # 1 music CD: 16.49
-  # 1 chocolate bar: 0.85
-  # Sales Taxes: 1.50
-  # Total: 29.83
-
 
 end
 

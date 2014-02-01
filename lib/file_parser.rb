@@ -1,5 +1,3 @@
-require_relative 'file_reader'
-
 class FileParser
 
   def self.parse_file(input)
@@ -14,4 +12,3 @@ class FileParser
 end
 
 
-puts FileParser.parse_file(FileReader.read_file)

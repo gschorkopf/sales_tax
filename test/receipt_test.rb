@@ -1,6 +1,6 @@
 require 'minitest'
 require 'minitest/autorun'
-require_relative 'calculation.rb'
+require_relative '../lib/calculation.rb'
 
 class ReceiptTest < MiniTest::Unit::TestCase
   attr_reader :receipt
