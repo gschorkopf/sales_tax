@@ -9,10 +9,18 @@ class ReceiptPrinter
     input.map{ |i| Receipt.new(i)}
   end
 
+  def print_formatted_receipt
+    create_receipts.each do |output|
+      output.summary.each do |summary|
+        File.open("output.txt", "a+"){|f| f << "#{summary}\n" }
+      end
+      File.open("output.txt", "a+"){|f| f << "Sales Taxes: #{output.sales_tax_total}\nTotal: #{output.subtotal}\n\n" }
+    end
+  end
+
 
 end
 
 r = ReceiptPrinter.new
-puts r.create_receipts.first.summary
-puts r.create_receipts.first.sales_tax_total
-puts r.create_receipts.first.subtotal
+puts r.print_formatted_receipt
+

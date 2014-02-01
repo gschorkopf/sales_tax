@@ -12,15 +12,13 @@ module Calculation
 
   def sales_tax(item_and_value)
     if exempt_and_import?(item_and_value)
-      price(item_and_value) * 0.1
+      price(item_and_value) * 0.05
     elsif nonexempt_and_import?(item_and_value)
       price(item_and_value) * 0.15
     elsif exempt_and_nonimport?(item_and_value)
       0
-    elsif nonexempt_and_nonimport?(item_and_value)
+    else nonexempt_and_nonimport?(item_and_value)
       price(item_and_value) * 0.10
-    else
-      price(item_and_value) * 0.05
     end
   end
 

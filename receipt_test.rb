@@ -31,7 +31,7 @@ class ReceiptTest < MiniTest::Unit::TestCase
   end
 
   def test_sales_tax_for_exempt_import_items
-    assert_equal 1.125, sales_tax("1 box of imported chocolates at 11.25")
+    assert_equal 1.125, sales_tax("1 box of imported chocolates at 10.00")
   end
 
   def test_sales_tax_for_non_exempt_import_items
