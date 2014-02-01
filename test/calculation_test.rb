@@ -2,7 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require_relative '../lib/calculation.rb'
 
-class ReceiptTest < MiniTest::Unit::TestCase
+class CalculationTest < MiniTest::Unit::TestCase
   attr_reader :receipt
   include Calculation
 
@@ -22,22 +22,20 @@ class ReceiptTest < MiniTest::Unit::TestCase
     assert_equal 12.49, price("1 book at 12.49")
   end
 
-  def test_basic_sales_tax_for_non_exempt_items_and_non_import_items
-    assert_equal 1.499, sales_tax("1 music CD at 14.99")
+  def test_sales_tax_for_nonexempt_items_and_nonimport_items
+    assert_equal 1.50, sales_tax("1 music CD at 14.99")
   end
 
-  def test_basic_sales_tax_for_exempt_items_and_non_import_items
+  def test_sales_tax_for_exempt_and_nonimport_items
     assert_equal 0, sales_tax("1 packet of headache pills at 9.75")
   end
 
-  def test_sales_tax_for_exempt_import_items
-    assert_equal 1.125, sales_tax("1 box of imported chocolates at 10.00")
+  def test_sales_tax_for_exempt_and_import_items
+    assert_equal 0.6, sales_tax("1 box of imported chocolates at 11.25")
   end
 
-  def test_sales_tax_for_non_exempt_import_items
-    assert_equal true, "1 imported bottle of perfume at 47.50".import?
-    assert_equal false, "1 imported bottle of perfume at 47.50".exempt?
-    assert_equal 7.125 , sales_tax("1 imported bottle of perfume at 47.50")
+  def test_sales_tax_for_nonexempt_and_import_items
+    assert_equal 7.15 , sales_tax("1 imported bottle of perfume at 47.50")
   end
 
 end

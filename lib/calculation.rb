@@ -1,4 +1,5 @@
 require_relative './string'
+require_relative './float'
 
 module Calculation
 
@@ -12,13 +13,13 @@ module Calculation
 
   def sales_tax(item_and_value)
     if exempt_and_import?(item_and_value)
-      price(item_and_value) * 0.05
+      (price(item_and_value) * 0.05).point_five
     elsif nonexempt_and_import?(item_and_value)
-      price(item_and_value) * 0.15
+      (price(item_and_value) * 0.15).point_five
     elsif exempt_and_nonimport?(item_and_value)
       0
-    else nonexempt_and_nonimport?(item_and_value)
-      price(item_and_value) * 0.10
+    else
+      (price(item_and_value) * 0.10).point_five
     end
   end
 
