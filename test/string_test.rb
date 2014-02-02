@@ -19,6 +19,4 @@ class StringTest < MiniTest::Unit::TestCase
     refute "1 packet of headache pills at 9.75".import?
   end
 
-
-
 end

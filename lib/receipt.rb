@@ -12,18 +12,16 @@ class Receipt
     input.collect do |line|
       summary = name_and_price(line).split[0..-2].join(" ")
       if sales_tax(line) > 0
-        total = sales_tax(line) + price(line)
+        total = (sales_tax(line) + price(line)).round(2)
       else
-        total = price(line)
+        total = (price(line)).round(2)
       end
       "#{summary} #{total}"
     end
   end
 
   def sales_tax_total
-    input.collect do |line|
-      sales_tax(line)
-    end.inject(:+)
+    input.collect { |line| (sales_tax(line)) }.inject(:+)
   end
 
   def item_totals

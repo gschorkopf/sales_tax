@@ -9,5 +9,4 @@ class FloatTest < MiniTest::Unit::TestCase
     assert_equal 7.15, (7.125).point_five
   end
 
-
 end

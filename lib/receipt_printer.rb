@@ -10,18 +10,20 @@ class ReceiptPrinter
   end
 
   def print_formatted_receipt
+    File.delete("output.txt") if File.exists?("output.txt")
+    counter = 1
     create_receipts.each do |output|
-      output.summary.each do |summary|
+        File.open("output.txt", "a+"){|f| f << "Output #{counter}:\n" }
+        output.summary.each do |summary|
         File.open("output.txt", "a+"){|f| f << "#{summary}\n" }
       end
-      File.open("output.txt", "a+"){|f| f << "Sales Taxes: #{output.sales_tax_total}\nTotal: #{output.subtotal}\n\n" }
+      File.open("output.txt", "a+"){|f| f << "Sales Taxes: #{(output.sales_tax_total).round(2)}\nTotal: #{(output.subtotal).round(2)}\n\n" }
+      counter += 1
     end
   end
-
 
 end
 
 r = ReceiptPrinter.new
-# puts r.create_receipts
 r.print_formatted_receipt
 
