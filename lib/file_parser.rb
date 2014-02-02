@@ -18,7 +18,7 @@ class FileParser
 
   def self.remove_empty_strings_within_arrays(input)
     input.collect do |array|
-      array.reject {|item| item.length <= 1 }
+      array.reject(:empty?)
     end
   end
 
